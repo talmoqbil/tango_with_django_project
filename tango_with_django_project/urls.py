@@ -13,15 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import url
 from django.contrib import admin
-from django.conf.urls import include
+from django.urls import path
+from django.urls import include
 from rango import views
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^rango/', include('rango.urls')),
-    # maps any URLs starting with rango/ to be handled by
-    # the rango application
-    url(r'^admin/', admin.site.urls),
+    
+    path('', views.index, name='index'),
+    path('rango/about/', views.about, name='about'),
+
+    path('rango/', include('rango.urls')),
+    # maps URLs starting with rango/ to be handled by rango.
+    path('admin/', admin.site.urls),
+
 ]
